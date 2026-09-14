@@ -1,0 +1,150 @@
+The opening, as a drop-in replacement for the intro array in whichever
+file you are working in.
+
+  intro: [
+    "I wrote about software before I was allowed to write any. All the way through my computer science degree at UET Taxila I was freelancing — more than a hundred tutorials on Tech-Recipes, the kind you find at one in the morning when something has broken and you are out of patience — while running the social media for a furniture company in Lahore. Neither was a plan. Both taught me the same thing, which is that you get one sentence to be understood.",
+
+    "Then I went into telecom rather than software. PTCL and Ufone took me onto the Summit programme and I spent a year in Islamabad in network operations: Huawei rollouts, root cause analyses, quarterly performance reviews where regional teams and vendor reports disagreed and someone had to work out which was lying. It was the year I learned what happens to a system after the people who built it have gone home. I have never designed anything the same way since.",
+
+    "Coming back to code was deliberate. A Pepsi bottler, a product company in Islamabad, a chief executive in New York whose cloud scripts and pitch decks I ran remotely while shipping engineering work in the same months, then .NET and ServiceNow inside Jazz. Now I put models into products at Technetium Labs — the first job where the writing, the operations and the security degree are all useful at once.",
+
+    "So this is a chart rather than a CV. The line is the life, in order. The globe is the work, drawn to scale: every job is a landmass and its area is the months I spent there. Touch one and the other answers, because they were never separate things.",
+
+    "If you would rather not play with a globe, all of it is written out in plain text below."
+  ]
+};
+
+const GROUPS = [
+  {
+    id: "work",
+    label: "Work",
+    under: "networks, then code",
+    lede: "Eleven postings in seven years, and only the last four have the word engineer in them. I know what happens to software after it ships, because for a year I was the one auditing it.",
+    entries: [
+      { title: "Senior Software Engineer — Technetium Labs",
+        meta: "Feb 2025 – now · hybrid · full-time · AI integrations",
+        blurb: "Putting models into products that already have users, deadlines and opinions. The model is never the hard part. The hard part is what the product does on the day the model is confidently wrong, and who has to clean it up.",
+        blurb2: "ADD — name one integration you shipped, what it does for the person using it, and the thing that surprised you." },
+
+      { title: "Specialist Application Developer — Jazz",
+        meta: "May – Nov 2024 · Lahore · contract · .NET Core, ServiceNow",
+        blurb: "Seven months building on ServiceNow and .NET Core inside Pakistan's largest mobile operator — enterprise software, where the constraint is never the code and always the twelve people who have to agree before it moves.",
+        blurb2: "This was the return after time away. I announced it on LinkedIn in two words: she's back. ADD — what you actually built here, and who used it." },
+
+      { title: "Assistant to the Chief Executive Officer — Taro Holdings",
+        meta: "Sep – Dec 2023 · New York · remote · executive and C-level support",
+        blurb: "Google Cloud scripting, scheduling, security auditing, pitch decks, presentations. Four months at a chief executive's elbow, from six thousand miles and nine time zones away, overlapping with a full-time engineering job in Islamabad.",
+        blurb2: "Everyone should do a stretch of this once. You learn which technical details survive contact with a board and which ones die in the room, and you stop resenting the people who ask for the one-slide version." },
+
+      { title: "Software Engineer — Asimplify",
+        meta: "Jun – Dec 2023 · Islamabad · on-site",
+        blurb: "ADD — this is the only role on the page with no story attached, and it shows. What was the product, what was your part of it, and what is one decision you would still defend?" },
+
+      { title: "Associate Software Developer — Haidri Beverages, PepsiCola International Franchise",
+        meta: "Feb – May 2023 · Rawalpindi · contract · JavaScript, C#",
+        blurb: "One project, start to finish, alone: business requirements document, build, deployment — under two months from first page to live. Working inside a bottling company teaches you that software is a rounding error next to trucks and crates, and that nobody there cares what it is written in.",
+        blurb2: "ADD — what the project did, and for which part of the business." },
+
+      { title: "Assistant Manager, Managed Security Services — Ufone 4G",
+        meta: "Aug – Oct 2022 · Islamabad · information security, MSSP",
+        blurb: "The posting that pointed me at the master's. Sitting on the managed security side of a national operator is a fast education in the difference between a policy that exists and a control that works.",
+        blurb2: "ADD — one thing you found or fixed here that you can talk about publicly." },
+
+      { title: "Assistant Manager, Network Operations Management — PTCL HQ",
+        meta: "Apr – Sep 2022 · Islamabad",
+        blurb: "I ran the Huawei Autin implementation across PTCL's field maintenance centres and its integration with the NOC and GIS, then consolidated the FMC data, provisioned the resources, and onboarded team leads, fibre deployers and fibre patrollers onto the new workforce management system — including the demonstrations, and the far harder job of getting people to actually use it.",
+        blurb2: "The rest was deep-dive reviews with regional and zonal teams every quarter — latencies, root cause analyses, our numbers against the vendor's — plus audit remediation, installed base verification, BBR and R&R management, escalations, and rental and site consolidation that found real savings in operations and maintenance. Six months of learning that most outages are organisational before they are technical." },
+
+      { title: "Management Trainee — PTCL",
+        meta: "Nov 2021 – Apr 2022 · PTCL HQ Islamabad · Summit batch 5",
+        blurb: "Six months rotating through a national telecom as one of the Summit intake. A computer science graduate being handed inventory, escalations and reporting instead of a repository, and slowly working out that this was the more useful thing to be handed.",
+        blurb2: "ADD — one moment from the rotation you still think about." },
+
+      { title: "Management Trainee Officer — PTCL",
+        meta: "Oct – Nov 2021 · Haripur, Khyber Pakhtunkhwa · internship",
+        blurb: "Where it started: two months in a district office, a long way from headquarters and further still from a code editor. The fibre in the ground and the people who patrol it stopped being an abstraction here." },
+
+      { title: "Student Intern — Bitsol Technologies",
+        meta: "Oct 2020 – Feb 2021 · BIIT Rawalpindi · MERN stack bootcamp",
+        blurb: "Five months of MERN. The first time the whole path — database, server, browser — was small enough to hold in my head at once, and the moment I stopped being someone who writes about software." },
+
+      { title: "Social Media Manager — Creative Solutions Furniture",
+        meta: "Sep 2019 – Dec 2020 · Lahore",
+        blurb: "Sixteen months writing for people who were already scrolling past, for a business where the product is physical and the customer is nobody's idea of a user. It is the best interface training I have had: one line, no second chance, and results you can count the same evening.",
+        links: [{ href:"https://creativesolutions.pk/", text:"creativesolutions.pk" }] }
+    ]
+  },
+  {
+    id: "study",
+    label: "Study",
+    under: "security, and the project that ate a year",
+    lede: "A computer science degree paid for partly by freelancing through it, a master's in information security that came straight out of the telecom year, and a final year project I still argue about.",
+    entries: [
+      { featured: true,
+        title: "Final year project — ADD THE TITLE",
+        meta: "FYP · ADD YEAR · ADD SUPERVISOR",
+        blurb: "ADD — what problem it solved, why it was hard, and what you would do differently now. Two or three sentences beats a paragraph of features. Say what you built it with, and say plainly what did not work; that is the part interviewers remember.",
+        blurb2: "ADD — the result: a grade, a demo, an exhibition, a paper, or simply the thing you learned.",
+        links: [{ href:"#", text:"ADD a link to the code or write-up" }] },
+
+      { title: "MS, Information Security",
+        meta: "National University of Sciences and Technology (NUST)",
+        blurb: "I went looking for this degree after a year of audit observations and security operations inside a national network, which is a very different reason for studying security than finding it interesting on paper.",
+        blurb2: "ADD — your thesis or focus area, in one line." },
+
+      { title: "BS, Computer Science",
+        meta: "University of Engineering and Technology, Taxila",
+        blurb: "I freelanced the whole way through it — over a hundred published tutorials and a social media job running alongside the coursework. The degree taught me the theory; the side work taught me deadlines, invoices and how to be understood by a stranger.",
+        blurb2: "ADD — the two courses that actually changed how you think." },
+
+      { title: "Certifications",
+        meta: "assorted",
+        blurb: "PyTorch Essential Training: Deep Learning · Foundations of Raising Capital · Foundations of Business and Entrepreneurship · 5G Technology Workshop · Body Language for Women." }
+    ]
+  },
+  {
+    id: "writing",
+    label: "Writing",
+    under: "a hundred tutorials, and counting",
+    lede: "I was paid to explain software before I was paid to write it, and it shows in everything I build.",
+    entries: [
+      { title: "Technical writer — Tech-Recipes",
+        meta: "Upwork · Jan 2019 – Feb 2020 · 100+ articles",
+        blurb: "More than a hundred published how-to articles, written through my degree for people who were stuck halfway through a task and losing patience. You cannot fake your way through that volume: either the steps work on someone else's machine or the comments tell you within a day.",
+        blurb2: "It is why I care about error messages. The sentence a person reads when something breaks is part of the product, and it is usually the part nobody was assigned.",
+        links: [{ href:"https://www.tech-recipes.com/blog/author/joudet-ahsan/", text:"Read the archive" }] },
+
+      { title: "ADD — post title", meta: "ADD year",
+        blurb: "ADD — one line on what it argues.",
+        links: [{ href:"#", text:"Read" }] },
+
+      { title: "ADD — post title", meta: "ADD year",
+        blurb: "ADD — one line on what it argues.",
+        links: [{ href:"#", text:"Read" }] }
+    ]
+  },
+  {
+    id: "making",
+    label: "Making",
+    under: "hands off the keyboard",
+    lede: "ADD — one sentence on what the hobbies have in common. They are not a break from the work; they are usually the same instinct pointed somewhere slower.",
+    entries: [
+      { title:"ADD — a hobby", meta:"since ADD",
+        blurb:"ADD — two sentences. The specific detail is what makes this section work: not 'I love reading' but what you are reading, and why it is stacked three deep on the table." },
+      { title:"ADD — a hobby", meta:"since ADD", blurb:"ADD — two sentences." },
+      { title:"ADD — a hobby", meta:"since ADD", blurb:"ADD — two sentences." }
+    ]
+  },
+  {
+    id: "home",
+    label: "Home",
+    under: "the reason for the rest",
+    lede: "The part of the map most portfolios leave off.",
+    entries: [
+      { title:"ADD — your husband's first name", meta:"ADD what he does",
+        blurb:"ADD — two sentences, and let one of them be about how he affects the work. The best version of this is small and concrete, not fond and general." },
+      { title:"Our child", meta:"born ADD year",
+        blurb:"ADD — two sentences. Keep the name and the photographs off a public page; 'our daughter, born 2024' carries all the warmth without handing a stranger a name and a face." }
+    ]
+  }
+];
