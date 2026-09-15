@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jaudet Ahsan — Senior Software Engineer, Lahore</title>
+<meta name="description" content="Jaudet Ahsan, senior software engineer in Lahore. AI integrations at Technetium Labs. Nine jobs drawn as an atlas: land area is time, longitude is chronology.">
+
+<!-- Fonts. If the file is opened offline the fallback stack below is close enough in
+     proportion that nothing reflows badly: Charter/Georgia for the serif, the system
+     mono for the chart labels. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="grain" aria-hidden="true">
+  <svg xmlns="http://www.w3.org/2000/svg">
+    <filter id="grainf"><feTurbulence type="fractalNoise" baseFrequency="0.82" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/></filter>
+    <rect width="100%" height="100%" filter="url(#grainf)"/>
+  </svg>
+</div>
+
+<a class="skip" href="#experience">Skip the chart, read the experience section</a>
+
+<header class="masthead">
+  <div class="masthead-top">
+    <div class="masthead-intro">
+      <h1 class="name">Jaudet Ahsan</h1>
+      <p class="standfirst" id="standfirst"></p>
+      <p class="coords" id="coords"></p>
+    </div>
+    <div class="masthead-right">
+      <nav class="social" id="social" aria-label="Contact and social links"></nav>
+      <div class="education-mini" id="educationMini" aria-label="Education"></div>
+    </div>
+  </div>
+</header>
+
+<main class="stage">
+
+  <!-- RIGHT PANEL in reading order sits second in the DOM on desktop, first on mobile,
+       but the timeline is what a screen reader should meet first, so the line stays
+       ahead of the globe in source order and CSS moves the globe with `order`. -->
+  <div class="panel-line">
+    <div class="tl-wrap">
+      <ol class="tl" id="timeline" aria-label="Life and work, in order"></ol>
+    </div>
+  </div>
+
+  <div class="panel-globe">
+    <div class="globe-wrap">
+      <svg id="globe" viewBox="0 0 1000 1000" role="group"
+           aria-label="A globe of the working life. Every job is a landmass whose area is the time spent there; longitude is chronology.">
+        <defs>
+          <radialGradient id="seafill" cx="38%" cy="30%" r="78%">
+            <stop offset="0%" stop-color="#173238"/>
+            <stop offset="62%" stop-color="#12272B"/>
+            <stop offset="100%" stop-color="#0A1618"/>
+          </radialGradient>
+          <pattern id="stipple" width="9" height="9" patternUnits="userSpaceOnUse">
+            <circle cx="1.4" cy="1.4" r=".55" fill="#2C4B49" fill-opacity=".55"/>
+            <circle cx="5.9" cy="6.2" r=".45" fill="#2C4B49" fill-opacity=".4"/>
+          </pattern>
+          <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(38)">
+            <line x1="0" y1="0" x2="0" y2="6" stroke="#8C8265" stroke-width=".7" stroke-opacity=".55"/>
+          </pattern>
+          <clipPath id="disc"><circle cx="500" cy="500" r="372"/></clipPath>
+        </defs>
+
+        <circle cx="500" cy="500" r="372" fill="url(#seafill)"/>
+        <circle cx="500" cy="500" r="372" fill="url(#stipple)"/>
+        <g clip-path="url(#disc)">
+          <g id="parallels" class="grat" aria-hidden="true"></g>
+          <g id="meridians" class="grat" aria-hidden="true"></g>
+          <g id="years" aria-hidden="true"></g>
+          <g id="lanes"></g>
+          <g id="features"></g>
+        </g>
+        <circle class="limb" cx="500" cy="500" r="372"/>
+      </svg>
+
+      <!-- Compass rose: the outbound links are the cardinal arms. -->
+      <svg class="rose" viewBox="0 0 260 200" role="group" aria-label="Contact and links">
+        <g transform="translate(130,100)">
+          <circle class="star" r="34"/><circle class="star" r="23"/>
+          <path class="star" d="M0,-34 L0,34 M-34,0 L34,0"/>
+          <path class="star" d="M-24,-24 L24,24 M24,-24 L-24,24" stroke-opacity=".5"/>
+          <g class="needle" id="needle">
+            <path class="needle-n" d="M0,-27 L6,0 L0,4 L-6,0 Z"/>
+            <path class="needle-s" d="M0,27 L6,0 L0,-4 L-6,0 Z"/>
+          </g>
+          <circle r="2.4" fill="#0B1416" stroke="#8DA09C"/>
+        </g>
+        <g id="roseArms"></g>
+      </svg>
+    </div>
+  </div>
+</main>
+
+<section class="experience" id="experience">
+  <div class="experience-in">
+    <h2 class="section-title">Experience, in detail</h2>
+    <div class="xp-carousel" id="xpCarousel">
+      <div class="xp-tabs" id="xpTabs" role="tablist" aria-label="Jump to a role"></div>
+      <div class="xp-viewport" id="xpViewport">
+        <div class="xp-track" id="xpTrack"></div>
+      </div>
+      <div class="xp-controls">
+        <button class="xp-nav" id="xpPrev" type="button" aria-label="Previous role">‹ Prev</button>
+        <span class="xp-counter" id="xpCounter"></span>
+        <button class="xp-nav" id="xpNext" type="button" aria-label="Next role">Next ›</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="skills" id="skillsSection">
+  <div class="skills-in">
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-wrap">
+      <svg class="skills-radar" id="skillsRadar" viewBox="0 0 460 460" role="img" aria-label="Skills radar chart"></svg>
+      <p class="skills-summary" id="skillsSummary"></p>
+    </div>
+  </div>
+</section>
+
+<aside class="drawer" id="drawer" role="dialog" aria-modal="false" aria-labelledby="drawerTitle" data-open="false" tabindex="-1">
+  <button class="drawer-close" id="drawerClose" type="button">Close (esc)</button>
+  <div class="drawer-in" id="drawerIn"></div>
+</aside>
+
+<footer id="footer"></footer>
+
+<script src="js/content.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
