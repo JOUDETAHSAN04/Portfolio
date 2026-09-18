@@ -567,11 +567,21 @@ drawerClose.addEventListener("click", closeDrawer);
 document.addEventListener("keydown", e=>{ if(e.key==="Escape" && drawer.dataset.open==="true") closeDrawer(); });
 drawerIn.addEventListener("click", ev=>{
   const jump = ev.target.closest("[data-jump]");
-  if(!jump) return;
-  ev.preventDefault();
-  closeDrawer();
-  focusJob(jump.dataset.jump);
-  $("#experience").scrollIntoView({behavior:REDUCED?"auto":"smooth", block:"start"});
+  if(jump){
+    ev.preventDefault();
+    closeDrawer();
+    focusJob(jump.dataset.jump);
+    $("#experience").scrollIntoView({behavior:REDUCED?"auto":"smooth", block:"start"});
+    return;
+  }
+  const photoBtn = ev.target.closest("[data-photo]");
+  if(photoBtn){
+    const img = drawerIn.querySelector('[data-img="'+photoBtn.dataset.photo+'"]');
+    if(!img) return;
+    const show = !img.classList.contains("show");
+    img.classList.toggle("show", show);
+    photoBtn.textContent = show ? "Hide photo" : "Show photo";
+  }
 });
 
 function openJob(id, fromGlobe, pinIndex){
@@ -585,7 +595,25 @@ function openJob(id, fromGlobe, pinIndex){
     '<div class="meta"><span>'+span(j)+' · '+j._months+' months'+(j.ongoing?', still running':'')+'</span>'+
     '<span>'+Math.round(j._share*100)+'% of the working life so far · '+
     'landmass radius '+j._rho.toFixed(1)+'°</span></div>';
+
+  if(j.website){
+    h += isTodo(j.website)
+      ? '<p class="xp-website todo">'+esc(j.website)+'</p>'
+      : '<a class="xp-website" href="'+esc(j.website)+'" target="_blank" rel="noopener">'+esc(j.website)+' ↗</a>';
+  }
+  if((j.skills||[]).length){
+    h += '<div class="xp-tags">'+j.skills.map(s=>
+      '<span class="xp-tag'+(isTodo(s)?' todo':'')+'">'+esc(s)+'</span>').join("")+'</div>';
+  }
+
   j.notes.forEach(n=> h += '<p'+(isTodo(n)?' class="todo"':'')+'>'+esc(n)+'</p>');
+
+  if(j.photo && !isTodo(j.photo)){
+    h += '<button type="button" class="xp-photo-btn" data-photo="'+j.id+'">Show photo</button>'+
+      '<img class="xp-photo" data-img="'+j.id+'" src="'+esc(j.photo)+'" '+
+      'alt="'+esc(j.role)+' at '+esc(j.org)+'">';
+  }
+
   if((j.projects||[]).length){
     h += '<p class="sub">Projects on this landmass</p><ul class="projects">';
     j.projects.forEach((p,i)=>{
@@ -597,13 +625,33 @@ function openJob(id, fromGlobe, pinIndex){
     });
     h += '</ul>';
   }
+
+  if((j.references||[]).length){
+    h += '<p class="sub">References</p><ul class="projects">';
+    j.references.forEach(r=>{
+      h += '<li><b'+(isTodo(r.name)?' class="todo"':'')+'>'+esc(r.name)+'</b>'+
+        '<span'+(isTodo(r.role)?' class="todo"':'')+'>'+esc(r.role)+'</span></li>';
+    });
+    h += '</ul>';
+  }
+
   if(lanesIn.length || lanesOut.length){
     h += '<p class="sub">Lanes</p>';
     lanesIn.forEach(l=> h += '<p>Carried in from '+esc(shortOrg(l.a))+': '+esc(l.label)+'. '+mark(l.note)+'</p>');
     lanesOut.forEach(l=> h += '<p>Carried out to '+esc(shortOrg(l.b))+': '+esc(l.label)+'. '+mark(l.note)+'</p>');
   }
-  h += '<p class="sub">Elsewhere</p><p><a href="#xp-'+id+'" data-jump="'+id+'">The full write-up below</a></p>';
+  h += '<p class="sub">Elsewhere</p><p><a href="#xp-'+id+'" data-jump="'+id+'">Back to the card on the carousel</a></p>';
   openDrawer(h);
+
+  const img = drawerIn.querySelector(".xp-photo");
+  if(img) img.addEventListener("error", ()=>{
+    const btn = drawerIn.querySelector('[data-photo="'+img.dataset.img+'"]');
+    const note = document.createElement("p");
+    note.className = "xp-website todo";
+    note.textContent = "Photo not found at "+img.getAttribute("src")+" — check the path in content.js.";
+    img.replaceWith(note);
+    if(btn) btn.remove();
+  });
 }
 
 function openLife(entry){
@@ -735,6 +783,13 @@ function buildSocial(){
     { label:"LinkedIn", href:c.linkedin,           todo:isTodo(c.linkedin) },
     { label:"GitHub",   href:c.github,             todo:isTodo(c.github) }
   ];
+  if(c.phone){
+    /* local "0330 5800323" display, "+923305800323" tel: link */
+    const digits = String(c.phone).replace(/\D/g,"");
+    const intl = digits.replace(/^0/, "+92");
+    const display = digits.replace(/^0(\d{3})(\d+)$/, "0$1 $2");
+    links.push({ label:display, href:"tel:"+intl, todo:isTodo(c.phone), isPhone:true });
+  }
   links.forEach(l=>{
     const a = document.createElement("a");
     if(l.todo){
@@ -808,6 +863,7 @@ function goToSlide(idOrIndex, opts){
 function buildExperience(){
   const host = $("#xpTrack");
   xpOrder = [...JOBS].reverse();
+  const TAG_CAP = 5;   // beyond this, collapse into a "+N" chip — the full list is one click away
   let h = "";
   xpOrder.forEach(j=>{
     h += '<article class="xp-card" id="xp-'+j.id+'">';
@@ -825,72 +881,28 @@ function buildExperience(){
     }
 
     if((j.skills||[]).length){
-      h += '<div class="xp-tags">'+j.skills.map(s=>
-        '<span class="xp-tag'+(isTodo(s)?' todo':'')+'">'+esc(s)+'</span>').join("")+'</div>';
+      const shown = j.skills.slice(0, TAG_CAP), extra = j.skills.length - shown.length;
+      h += '<div class="xp-tags">'+shown.map(s=>
+        '<span class="xp-tag'+(isTodo(s)?' todo':'')+'">'+esc(s)+'</span>').join("")+
+        (extra>0 ? '<span class="xp-tag more" data-open="'+j.id+'">+'+extra+' more</span>' : '')+
+        '</div>';
     }
 
-    if(j.photo && !isTodo(j.photo)){
-      h += '<button type="button" class="xp-photo-btn" data-photo="'+j.id+'">Show photo</button>'+
-        '<img class="xp-photo" data-img="'+j.id+'" src="'+esc(j.photo)+'" '+
-        'alt="'+esc(j.role)+' at '+esc(j.org)+'">';
-    } else if(j.photo){
-      h += '<p class="xp-website todo">'+esc(j.photo)+'</p>';
-    }
-
-    h += '<div class="xp-notes">';
-    j.notes.forEach(n=> h += '<p'+(isTodo(n)?' class="todo"':'')+'>'+esc(n)+'</p>');
-    h += '</div>';
-
-    if((j.projects||[]).length){
-      h += '<p class="xp-sub">Projects</p><ul class="xp-projects">';
-      j.projects.forEach(p=>{
-        h += '<li><b'+(isTodo(p.name)?' class="todo"':'')+'>'+esc(p.name)+'</b>'+
-          '<span'+(isTodo(p.blurb)?' class="todo"':'')+'>'+esc(p.blurb)+'</span>'+
-          (p.repo && !isTodo(p.repo) ? '<a href="'+esc(p.repo)+'" target="_blank" rel="noopener">Link</a>' : '')+
-          '</li>';
-      });
-      h += '</ul>';
-    }
-
-    if((j.references||[]).length){
-      h += '<p class="xp-sub">References</p><ul class="xp-refs">';
-      j.references.forEach(r=>{
-        h += '<li><b'+(isTodo(r.name)?' class="todo"':'')+'>'+esc(r.name)+'</b>'+
-          '<span'+(isTodo(r.role)?' class="todo"':'')+'>'+esc(r.role)+'</span></li>';
-      });
-      h += '</ul>';
-    }
+    const teaser = j.notes[0];
+    h += '<p class="xp-teaser'+(isTodo(teaser)?' todo':'')+'">'+esc(teaser)+'</p>';
+    h += '<button type="button" class="xp-more" data-open="'+j.id+'">Details →</button>';
 
     h += '</article>';
   });
   host.innerHTML = h;
 
-  /* one delegated listener covers every card's open-button and photo-toggle */
+  /* one delegated listener: every card's open-button (head, +N tags, and
+     the read-more button all share data-open) sends you to the drawer,
+     which is where the full notes, projects, skills, photo and
+     references for that job actually live. */
   host.addEventListener("click", ev=>{
     const openBtn = ev.target.closest("[data-open]");
-    if(openBtn){ openJob(openBtn.dataset.open); return; }
-    const photoBtn = ev.target.closest("[data-photo]");
-    if(photoBtn){
-      const img = host.querySelector('[data-img="'+photoBtn.dataset.photo+'"]');
-      if(!img) return;
-      const show = !img.classList.contains("show");
-      img.classList.toggle("show", show);
-      photoBtn.textContent = show ? "Hide photo" : "Show photo";
-      requestAnimationFrame(()=> goToSlide(xpIndex, {silent:true}));   // resize for the reveal
-    }
-  });
-
-  /* a photo path that doesn't resolve collapses to a note instead of a
-     broken-image icon */
-  host.querySelectorAll(".xp-photo").forEach(img=>{
-    img.addEventListener("error", ()=>{
-      const btn = host.querySelector('[data-photo="'+img.dataset.img+'"]');
-      const note = document.createElement("p");
-      note.className = "xp-website todo";
-      note.textContent = "Photo not found at "+img.getAttribute("src")+" — check the path in content.js.";
-      img.replaceWith(note);
-      if(btn) btn.remove();
-    });
+    if(openBtn) openJob(openBtn.dataset.open);
   });
 
   /* tabs: one per job, short org name, jumps straight to that slide */
@@ -927,68 +939,29 @@ function buildExperience(){
 }
 
 /* ==========================================================================
-   10d. SKILLS RADAR — a spider chart, one axis per skill in CV.skills,
-        drawn with the same polar-coordinate approach as the compass rose
-        above (angle round a centre, distance out from it), rather than a
-        row of plain bars. Hovering a vertex reveals its exact score, and
-        a one-line computed summary sits underneath.
+   10d. SKILLS CLOUD — a scattered set of tags, deliberately no ratings.
+        Each chip gets a small tilt computed from a hash of its own text,
+        so the layout looks hand-placed rather than gridded, but is stable
+        across reloads instead of re-randomising every time.
    ========================================================================== */
-function buildSkillsRadar(){
-  const svg = $("#skillsRadar");
-  const list = (CV.skills||[]).filter(s=>!isTodo(s.name));
-  if(!svg || list.length < 3) return;   // fewer than 3 axes doesn't read as a shape
-
-  const CXR = 230, CYR = 230, RMAX = 168, N = list.length;
-  const angleFor = i => (-90 + i*(360/N)) * D2R;
-  const pt = (i, frac) => [ CXR + Math.cos(angleFor(i))*RMAX*frac, CYR + Math.sin(angleFor(i))*RMAX*frac ];
-  const fx2 = n => n.toFixed(1);
-
-  let h = "";
-  [2,4,6,8,10].forEach(ring=>{
-    const pts = list.map((_,i)=> pt(i, ring/10).map(fx2).join(",")).join(" ");
-    h += '<polygon class="radar-grid'+(ring===10?' outer':'')+'" points="'+pts+'"/>';
-  });
-  list.forEach((_,i)=>{
-    const [x,y] = pt(i,1);
-    h += '<line class="radar-axis" x1="'+CXR+'" y1="'+CYR+'" x2="'+fx2(x)+'" y2="'+fx2(y)+'"/>';
-  });
-
-  const levels = list.map(s=> Math.max(0, Math.min(10, Number(s.level)||0)));
-  const dataPts = list.map((s,i)=> pt(i, levels[i]/10));
-  h += '<polygon class="radar-fill" points="'+dataPts.map(p=>p.map(fx2).join(",")).join(" ")+'"/>';
-
-  list.forEach((s,i)=>{
-    const ang = angleFor(i), c = Math.cos(ang), sn = Math.sin(ang);
-    const [lx,ly] = pt(i,1.16);
-    const anchor = c > 0.3 ? "start" : c < -0.3 ? "end" : "middle";
-    const dy = sn > 0.3 ? 8 : sn < -0.3 ? -3 : 3;
-    h += '<text class="radar-label" text-anchor="'+anchor+'" x="'+fx2(lx)+'" y="'+fx2(ly+dy)+'">'+esc(s.name)+'</text>';
-
-    const [dx,dyy] = dataPts[i];
-    h += '<g class="radar-vgroup" tabindex="0">'+
-      '<circle class="radar-dot" cx="'+fx2(dx)+'" cy="'+fx2(dyy)+'" r="4"/>'+
-      '<text class="radar-vlabel" text-anchor="'+anchor+'" x="'+fx2(dx + (anchor==="start"?8:anchor==="end"?-8:0))+'" y="'+fx2(dyy - 9)+'">'+esc(s.name)+' — '+levels[i]+'/10</text>'+
-      '</g>';
-  });
-  svg.innerHTML = h;
-
-  const avg = (levels.reduce((a,b)=>a+b,0)/levels.length).toFixed(1);
-  const maxLevel = Math.max(...levels);
-  const top = list.filter((s,i)=>levels[i]===maxLevel).map(s=>s.name);
-  const summary = $("#skillsSummary");
-  if(!summary) return;
-  let text = list.length+' skills tracked · average <b>'+avg+'/10</b>';
-  if(top.length < list.length){    // skip the clause if every skill is tied — it isn't informative
-    const topText = top.length>1 ? top.slice(0,-1).join(", ")+" and "+top[top.length-1] : top[0];
-    text += ' · strongest: <b>'+esc(topText)+'</b>';
-  }
-  summary.innerHTML = text;
+function buildSkillsCloud(){
+  const host = $("#skillsCloud");
+  const list = (CV.skills||[]).filter(s=> typeof s==="string" && !isTodo(s));
+  if(!host || !list.length) return;
+  const hash = s => { let h=0; for(let i=0;i<s.length;i++) h = (h*31 + s.charCodeAt(i))|0; return Math.abs(h); };
+  host.innerHTML = list.map(s=>{
+    const h = hash(s);
+    const tilt = (h % 9) - 4;              // -4..4deg, stable per skill
+    const alt = (h % 3===0) ? " alt" : "";  // a little colour variety, not a ranking
+    return '<span class="skill-chip'+alt+'" style="--tilt:'+tilt+'deg" tabindex="0">'+esc(s)+'</span>';
+  }).join("");
 }
 
 /* ==========================================================================
    12. GO
    ========================================================================== */
 $("#standfirst").innerHTML = CV.standfirst;
+if(CV.nameMeaning) $("#nameHint").textContent = CV.nameMeaning;
 $("#coords").innerHTML = CV.coords.map(s=>'<span>'+esc(s)+'</span>').join("");
 $("#footer").innerHTML = 'Drawn by hand. Land area is time; longitude is chronology. '+
   'Last continent measured to '+MONTHS[new Date().getMonth()]+' '+new Date().getFullYear()+'.';
@@ -996,7 +969,7 @@ $("#footer").innerHTML = 'Drawn by hand. Land area is time; longitude is chronol
 buildSocial();
 buildEducationMini();
 buildParallels(); buildMeridians(); buildYears(); buildLanes(); buildFeatures();
-buildTimeline(); buildRose(); buildExperience(); buildSkillsRadar();
+buildTimeline(); buildRose(); buildExperience(); buildSkillsCloud();
 view.lon0 = JOBS[JOBS.length-1]._lon;    // open on the current job, facing the viewer
 draw();
 requestAnimationFrame(tick);
