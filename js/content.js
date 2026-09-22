@@ -3,11 +3,7 @@
 
    Everything on the page — the intro, the social links, the mini education
    summary, the timeline, the globe, the drawer that opens when you click
-<<<<<<< HEAD
    something, the experience section, and the skills cloud — is generated
-=======
-   something, the experience section, and the skills meter — is generated
->>>>>>> 0371407c01020eeb5fc0147e969961267ebb1916
    from this one object. The rendering code lives in app.js and never needs
    to change just because you're adding a job or filling in a gap.
 
@@ -21,11 +17,7 @@
      3. Experience — one expandable card per job, in `jobs[]`, most recent
         first: location, duration, website, skills used, a photo toggle,
         the writeup, projects, and references.
-<<<<<<< HEAD
      4. Skills — a scattered cloud of tags, no ratings, from `skills[]`.
-=======
-     4. Skills — the 0–10 meter, from `skills[]`.
->>>>>>> 0371407c01020eeb5fc0147e969961267ebb1916
 
    HOW PLACEHOLDERS WORK
    Any string containing the word ADD is automatically underlined in
@@ -95,20 +87,12 @@
    BS and ends at your current job — add earlier/later life events back in
    at the start/end of the array if you want them on the page again.
 
-<<<<<<< HEAD
    TO ADD OR CHANGE A SKILL
    Edit the `skills` array near the bottom — a flat list of strings, no
    ratings. It renders as a scattered cloud of tags at the bottom of the
    page, each one given a small stable tilt computed from its own text
    (so reloading the page doesn't jitter them around). Add, remove, or
    reorder freely.
-=======
-   TO ADD OR CHANGE A SKILL METER
-   Edit the `skills` array near the bottom. Each row is
-   { name:"React", level:7 } — level is 0-10, a plain number. The names
-   below are pulled from your own job entries; the levels are a neutral
-   starting guess (5) — only you can rate how good you are at them.
->>>>>>> 0371407c01020eeb5fc0147e969961267ebb1916
 
    TO ADD YOUR EDUCATION LOGOS
    Drop the real image files in a `logos/` folder next to index.html and
@@ -129,22 +113,15 @@
    ========================================================================== */
 const CV = {
   name: "Jaudet Ahsan",
-<<<<<<< HEAD
   nameMeaning: "If you're wondering what that means, it means intelligent.",
   standfirst: "Backend-leaning full-stack developer working in fintech. I take products from first commit to production: designing the services, writing security in rather than patching it on later, and setting up CI/CD that holds up under real traffic. I've done this while finishing my degree, so I'm used to juggling. I've led small teams without stepping away from the code, mostly because I actually like writing it.",
-=======
-  standfirst: "A dependable generalist who owns products end-to-end — full-stack build, security baked in, deployment battle-tested, and the leadership instincts to steer a team while doing it.",
->>>>>>> 0371407c01020eeb5fc0147e969961267ebb1916
   coords: [
     "Lahore, Punjab · 31.5204° N, 74.3587° E",
     "Available for the slow read and the ninety-second skim"
   ],
   contact: {
     email: "joudetahsan@gmail.com",
-<<<<<<< HEAD
     phone: "03305800323",
-=======
->>>>>>> 0371407c01020eeb5fc0147e969961267ebb1916
     linkedin: "https://linkedin.com/in/jaudet-ahsan",
     github: "https://github.com/JOUDETAHSAN04",
     writing: "https://beingpakistaniblogs.wordpress.com/"
@@ -319,11 +296,7 @@ const CV = {
     { ref:"techrecipes" },
     { ref:"creative" },
     { ref:"ptcl" },
-<<<<<<< HEAD
     { id:"ms", kind:"edu", year:null, dateText:"", title:"MS Information Security",
-=======
-       { id:"ms", kind:"edu", year:null, dateText:"", title:"MS Information Security",
->>>>>>> 0371407c01020eeb5fc0147e969961267ebb1916
       body:["National University of Sciences and Technology. GPA 3.80."] },
     { ref:"bitsol" },
     { ref:"haidri" },
@@ -338,7 +311,6 @@ const CV = {
     { degree:"MS Information Security", school:"National University of Sciences and Technology (NUST)", gpa:"3.80", logo:"logos/nust.png" }
   ],
 
-<<<<<<< HEAD
   /* ---- skills, no ratings — just the list, shown as a scattered cloud of
      tags at the bottom of the page. Pulled from across your job entries
      and deduplicated. Add or remove strings freely; order doesn't matter,
@@ -350,20 +322,6 @@ const CV = {
     "ServiceNow ITSM", "Power Automate", "Selenium", "Workforce Management Systems",
     "Vendor Management", "SDLC & BRD Writing", "Technical Writing",
     "SEO / SEM", "Web Design", "Tailwind CSS", "Executive Support", "Audit & Compliance"
-=======
-  /* ---- skills meter, 0-10. Names below are pulled straight from the
-     skills tags on your job entries; `level` is a plain number, set it
-     yourself. Delete rows you don't want, add as many as you like. ------- */
-  skills: [
-    { name:"JavaScript / TypeScript", level:5 },
-    { name:"React", level:5 },
-    { name:"Angular", level:5 },
-    { name:".NET / ASP.NET Core", level:5 },
-    { name:"Node.js", level:5 },
-    { name:"Cloud (Google Cloud / AWS)", level:5 },
-    { name:"Network operations", level:5 },
-    { name:"Security", level:5 }
->>>>>>> 0371407c01020eeb5fc0147e969961267ebb1916
   ],
 
   /* ---- globe tuning ------------------------------------------------------ */

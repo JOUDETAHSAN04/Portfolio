@@ -65,7 +65,6 @@ svg :focus-visible{outline:1.5px solid var(--signal);outline-offset:2px}
   line-height:.94;letter-spacing:-.021em;margin:0 0 .55rem;
   /* optical alignment: the J's overhang is pulled back to the margin */
   margin-left:-.055em;
-<<<<<<< HEAD
   position:relative;display:inline-block;cursor:help;
 }
 /* the name-meaning tooltip: hidden until hover or keyboard focus */
@@ -80,10 +79,6 @@ svg :focus-visible{outline:1.5px solid var(--signal);outline-offset:2px}
 .name:hover .name-hint,.name:focus-visible .name-hint{opacity:1;transform:translateY(0)}
 .standfirst{font-size:clamp(1rem,.94rem + .35vw,1.16rem);max-width:62ch;margin:0;color:var(--ink);
   line-height:1.5}
-=======
-}
-.standfirst{font-size:clamp(1.06rem,1rem + .5vw,1.32rem);max-width:34ch;margin:0;color:var(--ink)}
->>>>>>> 0371407c01020eeb5fc0147e969961267ebb1916
 .standfirst em{font-style:italic;color:var(--mist)}
 .coords{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;color:var(--mist);
   margin:1.35rem 0 1.6rem;display:flex;gap:1.4rem;flex-wrap:wrap}
@@ -91,18 +86,11 @@ svg :focus-visible{outline:1.5px solid var(--signal);outline-offset:2px}
 
 .masthead-top{display:flex;justify-content:space-between;align-items:flex-start;gap:2rem 2.6rem;flex-wrap:wrap}
 .masthead-intro{flex:1 1 24rem;min-width:0}
-<<<<<<< HEAD
 .masthead-right{display:flex;flex-direction:column;align-items:flex-end;gap:1.3rem;
   min-width:13rem;border-left:1px solid var(--rule-soft);padding:.1rem 0 .1rem 2rem}
 .social{display:flex;gap:.7rem;flex-wrap:wrap;justify-content:flex-end}
 .social a{display:inline-block;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;
   color:var(--mist);text-decoration:none;border:1px solid var(--rule);padding:.6rem .95rem;
-=======
-.masthead-right{display:flex;flex-direction:column;align-items:flex-end;gap:1rem}
-.social{display:flex;gap:.7rem;flex-wrap:wrap;justify-content:flex-end}
-.social a{display:inline-block;font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;
-  color:var(--mist);text-decoration:none;border:1px solid var(--rule);padding:.5rem .8rem;
->>>>>>> 0371407c01020eeb5fc0147e969961267ebb1916
   transition:color .2s,border-color .2s;white-space:nowrap}
 .social a:hover,.social a:focus-visible{color:var(--signal);border-color:var(--signal)}
 .social a.todo{color:var(--signal);border-style:dashed;cursor:default}
@@ -111,13 +99,8 @@ svg :focus-visible{outline:1.5px solid var(--signal);outline-offset:2px}
 .edu-row{display:flex;align-items:center;gap:.55rem;justify-content:flex-end}
 .edu-logo{width:1.6rem;height:1.6rem;object-fit:contain;flex:none}
 .edu-text{display:flex;flex-direction:column;text-align:right;line-height:1.28}
-<<<<<<< HEAD
 .edu-degree{font-size:.86rem;color:var(--ink)}
 .edu-school{font-family:var(--mono);font-size:.7rem;letter-spacing:.05em;color:var(--mist);margin-top:.1rem}
-=======
-.edu-degree{font-size:.78rem;color:var(--ink)}
-.edu-school{font-family:var(--mono);font-size:.66rem;letter-spacing:.05em;color:var(--mist)}
->>>>>>> 0371407c01020eeb5fc0147e969961267ebb1916
 .edu-degree.todo,.edu-school.todo{color:var(--signal)}
 .edu-gpa{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;color:var(--verdigris);
   border:1px solid var(--rule);padding:.2rem .45rem;white-space:nowrap}
@@ -271,11 +254,7 @@ svg :focus-visible{outline:1.5px solid var(--signal);outline-offset:2px}
   white-space:nowrap;transition:border-color .2s,color .2s}
 .xp-tab:hover,.xp-tab:focus-visible{color:var(--land-lit)}
 .xp-tab.active{border-color:var(--signal);color:var(--signal)}
-<<<<<<< HEAD
 .xp-viewport{position:relative;overflow:hidden;transition:height .35s var(--ease);min-height:190px}
-=======
-.xp-viewport{position:relative;overflow:hidden;transition:height .35s var(--ease)}
->>>>>>> 0371407c01020eeb5fc0147e969961267ebb1916
 .xp-track{display:flex;align-items:flex-start;
   transition:transform .45s var(--ease);touch-action:pan-y}
 .xp-controls{display:flex;align-items:center;justify-content:space-between;margin-top:1.6rem}
@@ -300,15 +279,11 @@ svg :focus-visible{outline:1.5px solid var(--signal);outline-offset:2px}
 .xp-tag{border:1px solid var(--rule);color:var(--mist);font-family:var(--mono);font-size:.68rem;
   letter-spacing:.05em;padding:.3rem .6rem}
 .xp-tag.todo{border-color:var(--signal);color:var(--signal)}
-<<<<<<< HEAD
 .xp-tag.more{color:var(--verdigris);border-style:dashed}
-=======
->>>>>>> 0371407c01020eeb5fc0147e969961267ebb1916
 .xp-photo-btn{display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;
   color:var(--verdigris);background:none;border:1px solid var(--rule);padding:.5rem .8rem;
   cursor:pointer;margin:0 0 1.1rem;transition:border-color .2s,color .2s}
 .xp-photo-btn:hover,.xp-photo-btn:focus-visible{border-color:var(--verdigris);color:var(--land-lit)}
-<<<<<<< HEAD
 .xp-photo{display:none;max-width:100%;max-height:260px;width:100%;height:auto;object-fit:cover;
   margin:0 0 1.2rem;border:1px solid var(--rule-soft)}
 .xp-photo.show{display:block}
@@ -325,12 +300,6 @@ svg :focus-visible{outline:1.5px solid var(--signal);outline-offset:2px}
   transition:border-color .2s,color .2s}
 .xp-more:hover,.xp-more:focus-visible{border-color:var(--verdigris);color:var(--land-lit)}
 
-=======
-.xp-photo{display:none;max-width:100%;height:auto;margin:0 0 1.2rem;border:1px solid var(--rule-soft)}
-.xp-photo.show{display:block}
-.xp-notes p{max-width:62ch;margin:0 0 .85rem}
-.xp-notes .todo{color:var(--signal)}
->>>>>>> 0371407c01020eeb5fc0147e969961267ebb1916
 .xp-sub{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;color:var(--mist);
   text-transform:uppercase;margin:1.5rem 0 .6rem}
 .xp-refs,.xp-projects{list-style:none;margin:0;padding:0;max-width:62ch}
@@ -343,7 +312,6 @@ svg :focus-visible{outline:1.5px solid var(--signal);outline-offset:2px}
 
 /* ============================ SKILLS ======================================= */
 .skills{border-top:1px solid var(--rule);background:var(--deep);
-<<<<<<< HEAD
   padding:clamp(2.6rem,7vh,4.5rem) var(--gut) clamp(3rem,8vh,5.5rem)}
 .skills-in{max-width:56rem;margin:0 auto}
 
@@ -364,26 +332,6 @@ svg :focus-visible{outline:1.5px solid var(--signal);outline-offset:2px}
   border-color:var(--signal);color:var(--signal);
   transform:rotate(var(--tilt,0deg)) translateY(-4px);
 }
-=======
-  padding:0 var(--gut) clamp(3rem,8vh,5.5rem)}
-.skills-in{max-width:52rem;margin:0 auto}
-.skills-wrap{display:flex;flex-direction:column;align-items:center;gap:1.3rem}
-.skills-radar{width:min(100%,460px);height:auto;overflow:visible}
-.radar-grid{fill:none;stroke:var(--rule-soft);stroke-width:1}
-.radar-grid.outer{stroke:var(--rule)}
-.radar-axis{stroke:var(--rule-soft);stroke-width:1}
-.radar-fill{fill:var(--verdigris);fill-opacity:.2;stroke:var(--verdigris);stroke-width:1.5}
-.radar-dot{fill:var(--deep);stroke:var(--verdigris);stroke-width:1.5;cursor:pointer;
-  transition:r .15s,fill .15s,stroke .15s}
-.radar-vgroup:hover .radar-dot,.radar-vgroup:focus-within .radar-dot{fill:var(--signal);stroke:var(--signal);r:5.5}
-.radar-label{font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;fill:var(--mist)}
-.radar-vlabel{font-family:var(--mono);font-size:10.5px;fill:var(--signal);opacity:0;
-  pointer-events:none;transition:opacity .15s}
-.radar-vgroup:hover .radar-vlabel,.radar-vgroup:focus-within .radar-vlabel{opacity:1}
-.skills-summary{font-family:var(--mono);font-size:.78rem;color:var(--mist);text-align:center;
-  max-width:38rem;letter-spacing:.02em;line-height:1.8}
-.skills-summary b{color:var(--ink);font-weight:400}
->>>>>>> 0371407c01020eeb5fc0147e969961267ebb1916
 
 footer{border-top:1px solid var(--rule-soft);padding:2rem var(--gut) 3.5rem;
   font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;color:var(--mist)}
@@ -406,15 +354,10 @@ footer{border-top:1px solid var(--rule-soft);padding:2rem var(--gut) 3.5rem;
 @media (max-width:520px){
   .name{font-size:clamp(2.4rem,12vw,3.4rem)}
   .coords{gap:.9rem;font-size:.66rem}
-<<<<<<< HEAD
   .skill-chip{font-size:.76rem;padding:.55rem .95rem}
   .name-hint{max-width:220px;font-size:.68rem}
   .masthead-right{align-items:flex-start;width:100%;border-left:0;border-top:1px solid var(--rule-soft);
     padding:1.1rem 0 0;margin-top:.3rem}
-=======
-  .radar-label{font-size:9px}
-  .masthead-right{align-items:flex-start;width:100%}
->>>>>>> 0371407c01020eeb5fc0147e969961267ebb1916
   .social,.education-mini{justify-content:flex-start}
   .edu-row{justify-content:flex-start}
   .edu-text{text-align:left}
